@@ -1,0 +1,15 @@
+/.settings
+/.idea
+/*.project
+/*.iml
+*.iml
+/gl-finance-h5/target
+/gl-finance-h5/*.project
+/gl-finance-h5/.settings
+
+app/modules/receivableRebate/rebateSupplier/list/listCtrl_REMOTE_18664.js
+app/modules/receivableRebate/rebateSupplier/list/listCtrl_LOCAL_18664.js
+app/modules/receivableRebate/rebateSupplier/list/listCtrl_BASE_18664.js
+app/modules/receivableRebate/rebateSupplier/list/listCtrl_BACKUP_18664.js
+*.orig
+app/.idea/workspace.xml
