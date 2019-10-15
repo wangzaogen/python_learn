@@ -139,7 +139,7 @@ def pushtest(browser,project_name):
     test_jenkins_build(browser)
     time.sleep(1)
 
-def deploy():
+def deploy(project_name):
     print("准备deploy")
     browser.get(constant.test_deploy_login_url)
     name = browser.find_element_by_id("loginform-username")
@@ -149,20 +149,19 @@ def deploy():
     name.send_keys(user_name)
     pwd.send_keys(user_pwd)
     browser.find_element_by_name("login-button").click()
-    for project_name in build_projects:
-        browser.get(constant.test_deploy_task_url+constant.project_of_id.get(project_name))
+    browser.get(constant.test_deploy_task_url+constant.project_of_id.get(project_name))
+    time.sleep(1)
+    commit_id = get_commit_id(constant.project_of_id.get(project_name),'master')
 
-        commit_id = get_commit_id(constant.project_of_id.get(project_name),'master')
+    browser.find_element_by_id("task-commit_id").send_keys(commit_id)
 
-        browser.find_element_by_id("task-commit_id").send_keys(commit_id)
-
-        browser.find_element_by_class_name("btn-primary").click()
-        time.sleep(0.5)
-        browser.find_element_by_link_text('上线').click()
-        time.sleep(0.5)
-        browser.find_element_by_class_name("btn-deploy").click()
-        print(project_name+"正在发布上线")
-        time.sleep(1)
+    browser.find_element_by_class_name("btn-primary").click()
+    time.sleep(0.5)
+    browser.find_element_by_link_text('上线').click()
+    time.sleep(0.5)
+    browser.find_element_by_class_name("btn-deploy").click()
+    print(project_name+"正在发布上线")
+    time.sleep(1)
 
 ## 开发环境构建
 for project_name in build_projects:
@@ -179,7 +178,7 @@ for project_name in build_projects:
         flag = checkFinished(browser,project_name)
         pushtest(browser,project_name)
         if deploy_flag == 'y' or deploy_flag == 'Y':
-            deploy()
+            deploy(project_name)
 
     except Exception as e:
         print(project_name+"构建失败请检查配置.......")
