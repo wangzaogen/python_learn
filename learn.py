@@ -32,8 +32,8 @@ import uuid
 # print(uuid.uuid1())
 
 
-sStr1 = 'abcdefg'
-sStr2 = 'g'
+sStr1 = 'abcdafg'
+sStr2 = 'a'
 print (int(sStr1.find(sStr2)))
 
 
